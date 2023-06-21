@@ -1,11 +1,17 @@
 '''
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
-
+Задача 2: Найдите сумму цифр трехзначного числа.
 '''
 m = int(input("Введите трёхзначное число: "))
 number = m//100 + (m%100)//10 + m%10
 print(number)
+
+Задача 4: Петя, Катя и Сережа делают из бумаги журавликов. Вместе они сделали S журавликов. 
+Сколько журавликов сделал каждый ребенок, если известно, что Петя и Сережа сделали одинаковое 
+количество журавликов, а Катя сделала в два раза больше журавликов, чем Петя и Сережа вместе?
+
+s = int(input("Введите общее количество журавликов сделанных детьми: "))
+ser = s/6
+pet = s/6
+kat = (ser+pet) * 2
+print(ser, pet, kat)
+
