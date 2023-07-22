@@ -1,88 +1,65 @@
+Задача 22: Даны два неупорядоченных набора целых чисел (может быть, с повторениями).
+ Выдать без повторений в порядке возрастания все те числа, которые встречаются в обоих наборах.
+Пользователь вводит 2 числа. n — кол-во элементов первого множества. m — кол-во элементов второго множества. 
+Затем пользователь вводит сами элементы множеств.
+def find_common_elements(n, m):
+    set1 = set()
+    set2 = set()
 
-Задача 16: Требуется вычислить, сколько раз встречается некоторое число X в массиве A[1..N]. Пользователь в 
-первой строке вводит натуральное число N – количество элементов в массиве. В последующих  строках 
-записаны N целых чисел Ai. Последняя строка содержит число X
-def count_occurrences(arr, x):
-    count = 0
-    for num in arr:
-        if num == x:
-            count += 1
-    return count
+    print("Введите элементы первого множества:")
+    for _ in range(n):
+        element = int(input())
+        set1.add(element)
 
-n = int(input("Введите количество элементов в массиве: "))
-arr = []
-for _ in range(n):
-    num = int(input("Введите число: "))
-    arr.append(num)
-x = int(input("Введите число X: "))
+    print("Введите элементы второго множества:")
+    for _ in range(m):
+        element = int(input())
+        set2.add(element)
 
-occurrences = count_occurrences(arr, x)
-print(f"Число {x} встречается {occurrences} раз(а) в массиве.")
+    common_elements = sorted(list(set1.intersection(set2)))
 
-Задача 18: Требуется найти в массиве A[1..N] самый близкий по величине элемент к заданному числу X. 
-Пользователь в первой строке вводит натуральное число N – к
-количество элементов в массиве. В последующих  строках записаны N целых чисел Ai. 
-Последняя строка содержит число X
-def find_closest_element(arr, x):
-    closest = arr[0]
-    diff = abs(arr[0] - x)
-    
-    for num in arr:
-        if abs(num - x) < diff:
-            closest = num
-            diff = abs(num - x)
-    
-    return closest
+    return common_elements
 
-N = int(input("Введите количество элементов в массиве: "))
-arr = []
-for _ in range(N):
-    num = int(input("Введите элемент массива: "))
-    arr.append(num)
+if name == "main":
+    n = int(input("Введите количество элементов первого множества: "))
+    m = int(input("Введите количество элементов второго множества: "))
 
-x = int(input("Введите число X: "))
+    common_elements = find_common_elements(n, m)
 
-closest_element = find_closest_element(arr, x)
-print("Ближайший элемент к", x, ":", closest_element)
+    print("Общие элементы, встречающиеся в обоих множествах:")
+    print(common_elements)
 
-Задача 20: * В настольной игре Скрабл (Scrabble) каждая буква имеет определенную ценность. 
-В случае с английским алфавитом очки распределяются так:A, E, I, O, U, L, N, S, T, R – 1 очко;
-D, G – 2 очка; B, C, M, P – 3 очка; F, H, V, W, Y – 4 очка; K – 5 очков; J, X – 8 очков; Q, Z – 10 очков.
-А русские буквы оцениваются так: А, В, Е, И, Н, О, Р, С, Т – 1 очко; Д, К, Л, М, П, У – 2 очка; Б, Г, Ё, Ь, Я 
-– 3 очка; Й, Ы – 4 очка; Ж, З, Х, Ц, Ч – 5 очков; Ш, Э, Ю – 8 очков; Ф, Щ, Ъ – 10 очков. Напишите программу, 
-которая вычисляет стоимость введенного пользователем слова. Будем считать, что на вход подается только одно 
-слово, которое содержит либо только английские, либо только русские буквы.
-def calculate_score(word):
-    english_scores = {
-        'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'S': 1, 'T': 1, 'R': 1,
-        'P': 2, 'G': 2,
-        'B': 3, 'C': 3, 'M': 3, 'V': 4, 'W': 4, 'Y': 4,
-        'K': 5, 'X': 8,
-        'Q': 10, 'Z': 10
-    }
-    
-    russian_scores = {
-        'А': 1, 'В': 1, 'Е': 1, 'И': 1, 'Н': 1, 'О': 1, 'Р': 1, 'С': 1, 'Т': 1,
-        'Д': 2, 'К': 2, 'Л': 2, 'М': 2, 'П': 2, 'У': 2,
-        'Б': 3, 'Г': 3, 'Ё': 3, 'Ь': 3, 'Я': 3,
-        'Й': 4, 'Ы': 4,
-        'Ж': 5, 'З': 5, 'Х': 5, 'Ц': 5, 'Ч': 5,
-        'Ш': 8, 'Э': 8, 'Ю': 8,
-        'Ф': 10, 'Щ': 10, 'Ъ': 10
-    }
+Задача 24: В фермерском хозяйстве в Карелии выращивают чернику. Она растёт на круглой грядке, причём кусты 
+высажены только по окружности. Таким образом, у каждого куста есть ровно два соседних. Всего на грядке 
+растёт N кустов. Эти кусты обладают разной урожайностью, поэтому ко времени сбора на них выросло различное 
+число ягод — на i-ом кусте выросло ai ягод. В этом фермерском хозяйстве внедрена система автоматического сбора 
+черники. Эта система состоит из управляющего модуля и нескольких собирающих модулей. Собирающий модуль за один 
+заход, находясь непосредственно перед некоторым кустом, собирает ягоды с этого куста и с двух соседних с ним.
+Напишите программу для нахождения максимального числа ягод, которое может собрать за один заход собирающий
+ модуль, находясь перед некоторым кустом заданной во входном файле грядки.
 
-    score = 0
-    word = word.upper() 
+8
+3 5 2 7 8 4 1 6
 
-    if all(letter in english_scores for letter in word):  
-        score = sum(english_scores[letter] for letter in word)
-    elif all(letter in russian_scores for letter in word): 
-        score = sum(russian_scores[letter] for letter in word)
-    else:
-        print("Ошибка: слово должно содержать либо только английские, либо только русские буквы.")
-    
-    return score
+def max_collected_berries(N, berries):
+    max_berries = 0
+    for i in range(N):
+        collected_berries = berries[i] + berries[i - 1] + berries[(i + 1) % N]
+        max_berries = max(max_berries, collected_berries)
+    return max_berries
 
-word = input("Введите слово: ")
-score = calculate_score(word)
-print("Стоимость слова:", score)
+
+if name == "main":
+    try:
+        with open("input.txt", "r") as file:
+            N = int(file.readline().strip())
+            berries = list(map(int, file.readline().split()))
+            if len(berries) != N:
+                raise ValueError("Incorrect number of berry counts.")
+            
+            result = max_collected_berries(N, berries)
+            print(f"Maximum number of berries that can be collected in one pass: {result}")
+    except FileNotFoundError:
+        print("Could not find the input file.")
+    except ValueError as e:
+        print(f"Error: {e}")
