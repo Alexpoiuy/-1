@@ -1,65 +1,33 @@
-Задача 22: Даны два неупорядоченных набора целых чисел (может быть, с повторениями).
- Выдать без повторений в порядке возрастания все те числа, которые встречаются в обоих наборах.
-Пользователь вводит 2 числа. n — кол-во элементов первого множества. m — кол-во элементов второго множества. 
-Затем пользователь вводит сами элементы множеств.
-def find_common_elements(n, m):
-    set1 = set()
-    set2 = set()
+Задача 26:  Напишите программу, которая на вход принимает два числа A и B, и возводит 
+число А в целую степень B с помощью рекурсии.
 
-    print("Введите элементы первого множества:")
-    for _ in range(n):
-        element = int(input())
-        set1.add(element)
+def power_recursive(A, B):
+    if B == 0:
+        return 1
+    elif B == 1:
+        return A
+    else:
+        return A * power_recursive(A, B - 1)
 
-    print("Введите элементы второго множества:")
-    for _ in range(m):
-        element = int(input())
-        set2.add(element)
+A = int(input("Введите число A: "))
+B = int(input("Введите степень B: "))
 
-    common_elements = sorted(list(set1.intersection(set2)))
+result = power_recursive(A, B)
+print(f"{A} в степени {B} равно {result}")
 
-    return common_elements
+Задача 28: Напишите рекурсивную функцию sum(a, b), возвращающую сумму двух целых неотрицательных 
+чисел. Из всех арифметических операций допускаются только +1 и -1. Также нельзя использовать циклы.
 
-if name == "main":
-    n = int(input("Введите количество элементов первого множества: "))
-    m = int(input("Введите количество элементов второго множества: "))
+def sum(a, b):
+    if b == 0:
+        return a
+    elif b > 0:
+        return sum(a + 1, b - 1)
+    else:
+        return sum(a - 1, b + 1)
 
-    common_elements = find_common_elements(n, m)
+a = int(input("Введите первое число (неотрицательное): "))
+b = int(input("Введите второе число (неотрицательное): "))
 
-    print("Общие элементы, встречающиеся в обоих множествах:")
-    print(common_elements)
-
-Задача 24: В фермерском хозяйстве в Карелии выращивают чернику. Она растёт на круглой грядке, причём кусты 
-высажены только по окружности. Таким образом, у каждого куста есть ровно два соседних. Всего на грядке 
-растёт N кустов. Эти кусты обладают разной урожайностью, поэтому ко времени сбора на них выросло различное 
-число ягод — на i-ом кусте выросло ai ягод. В этом фермерском хозяйстве внедрена система автоматического сбора 
-черники. Эта система состоит из управляющего модуля и нескольких собирающих модулей. Собирающий модуль за один 
-заход, находясь непосредственно перед некоторым кустом, собирает ягоды с этого куста и с двух соседних с ним.
-Напишите программу для нахождения максимального числа ягод, которое может собрать за один заход собирающий
- модуль, находясь перед некоторым кустом заданной во входном файле грядки.
-
-8
-3 5 2 7 8 4 1 6
-
-def max_collected_berries(N, berries):
-    max_berries = 0
-    for i in range(N):
-        collected_berries = berries[i] + berries[i - 1] + berries[(i + 1) % N]
-        max_berries = max(max_berries, collected_berries)
-    return max_berries
-
-
-if name == "main":
-    try:
-        with open("input.txt", "r") as file:
-            N = int(file.readline().strip())
-            berries = list(map(int, file.readline().split()))
-            if len(berries) != N:
-                raise ValueError("Incorrect number of berry counts.")
-            
-            result = max_collected_berries(N, berries)
-            print(f"Maximum number of berries that can be collected in one pass: {result}")
-    except FileNotFoundError:
-        print("Could not find the input file.")
-    except ValueError as e:
-        print(f"Error: {e}")
+result = sum(a, b)
+print(f"Сумма чисел {a} и {b} равна {result}")
