@@ -1,33 +1,29 @@
-Задача 26:  Напишите программу, которая на вход принимает два числа A и B, и возводит 
-число А в целую степень B с помощью рекурсии.
+Задача 30:  Заполните массив элементами арифметической прогрессии. Её первый элемент, 
+разность и количество элементов нужно ввести с клавиатуры. Формула для получения n-го члена прогрессии: 
+an = a1 + (n-1) * d. Каждое число вводится с новой строки.
 
-def power_recursive(A, B):
-    if B == 0:
-        return 1
-    elif B == 1:
-        return A
-    else:
-        return A * power_recursive(A, B - 1)
+def arithmetic_progression(a1, d, n):
+    progression = [a1 + (i - 1) * d for i in range(1, n + 1)]
+    return progression
 
-A = int(input("Введите число A: "))
-B = int(input("Введите степень B: "))
+a1 = int(input("Введите первый элемент прогрессии: "))
+d = int(input("Введите разность прогрессии: "))
+n = int(input("Введите количество элементов прогрессии: "))
 
-result = power_recursive(A, B)
-print(f"{A} в степени {B} равно {result}")
+result = arithmetic_progression(a1, d, n)
 
-Задача 28: Напишите рекурсивную функцию sum(a, b), возвращающую сумму двух целых неотрицательных 
-чисел. Из всех арифметических операций допускаются только +1 и -1. Также нельзя использовать циклы.
+print("Массив арифметической прогрессии:")
+print(result)
 
-def sum(a, b):
-    if b == 0:
-        return a
-    elif b > 0:
-        return sum(a + 1, b - 1)
-    else:
-        return sum(a - 1, b + 1)
+Задача 32: Определить индексы элементов массива (списка), значения которых принадлежат заданному
+диапазону (т.е. не меньше заданного минимума и не больше заданного максимума)
 
-a = int(input("Введите первое число (неотрицательное): "))
-b = int(input("Введите второе число (неотрицательное): "))
+def find_indexes_in_range(arr, min_value, max_value):
+    indexes = [index for index, value in enumerate(arr) if min_value <= value <= max_value]
+    return indexes
 
-result = sum(a, b)
-print(f"Сумма чисел {a} и {b} равна {result}")
+my_list = [10, 25, 30, 15, 5, 20]
+min_value = 10
+max_value = 25
+result_indexes = find_indexes_in_range(my_list, min_value, max_value)
+print(result_indexes)  
