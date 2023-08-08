@@ -1,29 +1,53 @@
-Задача 30:  Заполните массив элементами арифметической прогрессии. Её первый элемент, 
-разность и количество элементов нужно ввести с клавиатуры. Формула для получения n-го члена прогрессии: 
-an = a1 + (n-1) * d. Каждое число вводится с новой строки.
+Задача 34:  Винни-Пух попросил Вас посмотреть, есть ли в его стихах ритм. Поскольку разобраться в его 
+кричалках не настолько просто, насколько легко он их придумывает, Вам стоит написать программу. Винни-Пух 
+считает, что ритм есть, если число слогов (т.е. число гласных букв) в каждой фразе стихотворения одинаковое.
+ Фраза может состоять из одного слова, если во фразе несколько слов, то они разделяются дефисами. Фразы 
+ отделяются друг от друга пробелами. Стихотворение  Винни-Пух вбивает в программу с клавиатуры. В ответе 
+ напишите “Парам пам-пам”, если с ритмом все в порядке и “Пам парам”, если с ритмом все не в порядке
 
-def arithmetic_progression(a1, d, n):
-    progression = [a1 + (i - 1) * d for i in range(1, n + 1)]
-    return progression
+ def count_vowels(word):
+    vowels = "AEIOUYaeiouy"
+    return sum(1 for char in word if char in vowels)
 
-a1 = int(input("Введите первый элемент прогрессии: "))
-d = int(input("Введите разность прогрессии: "))
-n = int(input("Введите количество элементов прогрессии: "))
+def check_rhythm(poem):
+    lines = poem.split()
+    syllables_in_line = [count_vowels(line.replace('-', '')) for line in lines]
+    
+    if all(syllables == syllables_in_line[0] for syllables in syllables_in_line):
+        return "Парам пам-пам"
+    else:
+        return "Пам парам"
 
-result = arithmetic_progression(a1, d, n)
-
-print("Массив арифметической прогрессии:")
+poem = input("Введите стихотворение Винни-Пуха: ")
+result = check_rhythm(poem)
 print(result)
 
-Задача 32: Определить индексы элементов массива (списка), значения которых принадлежат заданному
-диапазону (т.е. не меньше заданного минимума и не больше заданного максимума)
+Задача 36: Напишите функцию print_operation_table(operation, num_rows=6, num_columns=6), 
+которая принимает в качестве аргумента функцию, вычисляющую элемент по номеру строки и столбца.
+ Аргументы num_rows и num_columns указывают число строк и столбцов таблицы, которые должны быть 
+ распечатаны. Нумерация строк и столбцов идет с единицы (подумайте, почему не с нуля). Примечание:
+  бинарной операцией называется любая операция, у которой ровно два аргумента, как, например, у 
+  операции умножения.
 
-def find_indexes_in_range(arr, min_value, max_value):
-    indexes = [index for index, value in enumerate(arr) if min_value <= value <= max_value]
-    return indexes
+def print_operation_table(operation, num_rows=6, num_columns=6):
+    print("   ", end="")
+    for col in range(1, num_columns + 1):
+        print(f"{col:4}", end="")
+    print()
+    
+    print("   ", end="")
+    for _ in range(num_columns):
+        print("----", end="")
+    print()
+    
+    for row in range(1, num_rows + 1):
+        print(f"{row:2} |", end="")
+        for col in range(1, num_columns + 1):
+            result = operation(row, col)
+            print(f"{result:4}", end="")
+        print()
 
-my_list = [10, 25, 30, 15, 5, 20]
-min_value = 10
-max_value = 25
-result_indexes = find_indexes_in_range(my_list, min_value, max_value)
-print(result_indexes)  
+def multiply(x, y):
+    return x * y
+
+print_operation_table(multiply)
